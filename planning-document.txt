@@ -1,0 +1,132 @@
+PLANNING DOCUMENT
+Palateer — Recipe Discovery & Meal Planning App
+
+STATUS AS OF THIS DOCUMENT
+No code has been written yet. Six UI mockups have been designed
+(Home/Recipe browsing, Recipe detail, Meal planner, Favorites,
+404 Not Found, Mobile view) to guide the build. This document
+describes the intended component structure, data flow, and state
+strategy for implementation.
+
+------------------------------------------------------------
+1. COMPONENT HIERARCHY
+
+App
+├── Navbar (all pages)
+├── Routes
+│   ├── Home
+│   │   └── AudioPlayer (cooking tip)
+│   ├── RecipesPage
+│   │   ├── SearchBar
+│   │   ├── RecipeFilter
+│   │   └── RecipeList
+│   │       └── RecipeCard (many, one per recipe)
+│   ├── RecipeDetailPage (route: /recipes/:id)
+│   │   ├── VideoPlayer
+│   │   ├── AudioPlayer
+│   │   └── Button (Add to meal plan)
+│   ├── MealPlannerPage
+│   │   └── MealPlanner
+│   │       └── DayCard (x7, Monday-Sunday)
+│   │           └── Modal (recipe picker, on "add" click)
+│   ├── FavoritesPage
+│   │   ├── RecipeList
+│   │   │   └── RecipeCard (many)
+│   │   └── EmptyState (shown when no favorites)
+│   └── NotFound
+└── Footer (all pages)
+
+Nesting depth reaches 4 levels in places (App > RecipesPage >
+RecipeList > RecipeCard), satisfying the 3+ levels requirement.
+
+Shared/reusable components (used in 2+ places): RecipeCard,
+Button, Card, Loading, RecipeList, DayCard (used 7x within
+MealPlanner alone).
+
+------------------------------------------------------------
+2. DATA FLOW
+
+Top-level state lives in App.jsx:
+  - recipes        (array, loaded from data/recipesData.js on mount)
+  - favorites       (array of recipe ids, persisted to localStorage)
+  - mealPlan        (object keyed by day -> {breakfast, lunch, dinner})
+  - isLoading        (boolean, set during initial data load)
+
+Downward (parent -> child):
+  - App passes `recipes`, `favorites`, `onToggleFavorite` to
+    RecipesPage and FavoritesPage
+  - RecipesPage passes filtered recipes to RecipeList
+  - RecipeList passes one `recipe` object + `isFavorite` +
+    `onToggleFavorite` to each RecipeCard
+  - App passes `mealPlan`, `onAddMeal`, `onRemoveMeal` to
+    MealPlannerPage -> MealPlanner -> each DayCard (with that
+    day's slice of mealPlan)
+
+Upward (child -> parent, via callback props):
+  - RecipeCard calls `onToggleFavorite(recipeId)` on heart click
+  - DayCard calls `onAddMeal(day, slot, recipe)` and
+    `onRemoveMeal(day, slot)`
+  - SearchBar and RecipeFilter call `onChange` handlers that update
+    filter state in RecipesPage
+
+Sibling communication (through shared parent state):
+  - Favoriting a recipe on RecipesPage is reflected immediately on
+    FavoritesPage, because both read the same `favorites` state
+    from App
+  - Adding a recipe to the meal plan from RecipeDetailPage updates
+    what MealPlannerPage displays, via the shared `mealPlan` state
+
+Local-only state (not lifted): search text, active filter
+selections, modal open/closed, mobile nav menu open/closed — each
+owned by the component that uses it.
+
+------------------------------------------------------------
+3. COMPONENTS TO BE CREATED
+
+Navigation: Navbar
+Recipe: RecipeCard, RecipeList, RecipeDetail, RecipeFilter
+Meal Planner: MealPlanner, DayCard
+Media: VideoPlayer, AudioPlayer
+UI (reusable): Button, Card, SearchBar, Loading, Modal, EmptyState
+Common: Header, Footer
+Pages: Home, RecipesPage, RecipeDetailPage, MealPlannerPage,
+       FavoritesPage, NotFound
+
+Total: 19 components (well above the 10+ minimum), 0 class
+components.
+
+------------------------------------------------------------
+4. PROPS FLOW (KEY EXAMPLES)
+
+RecipeCard receives: recipe (object, required), isFavorite (bool,
+default false), onToggleFavorite (func)
+
+DayCard receives: day (string, required), meals (object, required),
+onAddMeal (func), onRemoveMeal (func)
+
+VideoPlayer receives: videoUrl (string, required), title (string,
+default "Tutorial")
+
+Card and Modal both accept a `children` prop for composition.
+
+------------------------------------------------------------
+5. STATE MANAGEMENT STRATEGY
+
+- useState for all local and lifted state (search term, filters,
+  favorites array, mealPlan object, isLoading/error booleans)
+- useEffect (3 uses minimum):
+  1. Load recipesData into state on App mount
+  2. Read favorites/mealPlan from localStorage on mount
+  3. Write favorites/mealPlan to localStorage whenever they change
+- State is lifted to the lowest common ancestor that needs it (App
+  for favorites/mealPlan/recipes; individual pages for their own
+  filter/search state) to avoid unnecessary prop drilling.
+
+------------------------------------------------------------
+6. OPEN QUESTIONS / NEXT STEPS
+- Confirm Vite vs Create React App for setup
+- Source or generate placeholder video/audio assets
+- Write sample recipesData.js covering all 5 required categories
+- Build components bottom-up: UI primitives first, then Recipe and
+  MealPlanner components, then pages, then routing
+
