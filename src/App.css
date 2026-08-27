@@ -1,184 +1,610 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+/* ============================================================
+   CSS RESET
+   ============================================================ */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
   padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
-  .logo {
-    height: 18px;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  min-width: 300px;
+  margin: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================================
+   ROOT - DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  /* Typography — Poppins carries the brand voice in headings & UI labels,
+     Inter stays quiet and highly legible for body copy and data. */
+  --font-display: "Poppins", sans-serif;
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* ── Primary Palette: Herb Green ── */
+  --color-primary: #3f8d32;
+  --color-primary-light: #c8e0c4;
+  --color-primary-pale: #ecf5e7;
+  --color-primary-dark: #2c6b22;
+  --color-primary-darker: #1f4d18; /* deep forest — dark sections, footers */
+
+  /* ── Accent Palette: Golden Honey ── */
+  --color-accent: #fdbc1e;
+  --color-accent-light: #feca64;
+  --color-accent-pale: #fef8eb;
+  --color-accent-dark: #e2a10e;
+
+  /* ── Tertiary Palette: Coral (favorites, hearts, highlights) ── */
+  --color-coral: #fc6c6c;
+  --color-coral-light: #f97c7c;
+  --color-coral-pale: #fef2ef;
+  --color-coral-dark: #c95953;
+
+  /* ── Complementary: Sage & Butter (quiet, modern support tones) ── */
+  --color-sage: #7fa876; /* muted green-gray, between primary and neutral */
+  --color-butter: #fff3d1; /* soft warm highlight, lighter than accent-pale */
+  --color-clay: #a94640; /* deepest warm neutral, for rare emphasis/error text */
+
+  /* ── Neutrals ── */
+  --color-white: #fdfcfb;
+  --color-gray-100: #f1f1f1;
+  --color-gray-200: #e3e2e0;
+  --color-gray-300: #cac9c6;
+  --color-gray-400: #a3a19c;
+  --color-gray-500: #7c7a75;
+  --color-gray-600: #504f4f;
+  --color-gray-700: #37363a;
+  --color-ink: #212832; /* near-black*/
+  --color-black: #000000;
+
+  /* ── Text ── */
+  --text-primary: #212832;
+  --text-secondary: #504f4f;
+  --text-muted: #7c7a75;
+  --text-light: #a3a19c;
+  --text-white: #fdfcfb;
+  --text-accent: #2f8c18;
+
+  /* ── Backgrounds ── */
+  --bg-primary: #fefefe;
+  --bg-secondary: #f1f1f1;
+  --bg-tint-green: #ecf5e7;
+  --bg-tint-nav: #fdfaf4;
+  --bg-tint-coral: #fef2ef;
+  --bg-dark: #212832;
+  --bg-accent: #3f8d32;
+  --bg-hover: #ecf5e7;
+
+  /* ── Borders ── */
+  --border-light: #f1f1f1;
+  --border-medium: #e3e2e0;
+  --border-dark: #cac9c6;
+  --border-accent: #3f8d32;
+  --border-primary: #212832;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(33, 40, 50, 0.08);
+  --shadow-md: 0 4px 10px rgba(33, 40, 50, 0.1);
+  --shadow-lg: 0 10px 25px rgba(33, 40, 50, 0.14);
+  --shadow-xl: 0 20px 40px rgba(33, 40, 50, 0.18);
+  --shadow-accent: 0 4px 14px rgba(63, 141, 50, 0.28);
+  --shadow-coral: 0 4px 14px rgba(252, 108, 108, 0.3);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  /* ── Buttons ── */
+  --btn-primary-bg: #3f8d32;
+  --btn-primary-text: #fdfcfb;
+  --btn-primary-hover: #357628;
+  --btn-primary-active: #2c6b22;
+  --btn-primary-shadow: 0 4px 12px rgba(63, 141, 50, 0.28);
+
+  --btn-accent-bg: #fdbc1e;
+  --btn-accent-text: #212832;
+  --btn-accent-hover: #feca64;
+  --btn-accent-active: #e2a10e;
+  --btn-accent-shadow: 0 4px 12px rgba(253, 188, 30, 0.35);
+
+  --btn-coral-bg: #fc6c6c;
+  --btn-coral-text: #fdfcfb;
+  --btn-coral-hover: #f97c7c;
+  --btn-coral-active: #c95953;
+  --btn-coral-shadow: 0 4px 12px rgba(252, 108, 108, 0.32);
+
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: #212832;
+  --btn-secondary-border: #212832;
+  --btn-secondary-hover-bg: #212832;
+  --btn-secondary-hover-text: #fdfcfb;
+
+  --btn-outline-bg: transparent;
+  --btn-outline-text: #3f8d32;
+  --btn-outline-border: #3f8d32;
+  --btn-outline-hover-bg: #3f8d32;
+  --btn-outline-hover-text: #fdfcfb;
+
+  --btn-ghost-bg: #ecf5e7;
+  --btn-ghost-text: #2c6b22;
+  --btn-ghost-hover: #c8e0c4;
+
+  /* ── Highlights ── */
+  --highlight-primary: #3f8d32;
+  --highlight-secondary: #fdbc1e;
+  --accent-underline: #fdbc1e;
+  --selection-bg: #c8e0c4;
+  --selection-text: #212832;
+
+  /* ── Status (mapped onto brand hues so alerts stay on-palette) ── */
+  --status-success: #3f8d32;
+  --status-success-bg: #ecf5e7;
+  --status-warning: #e2a10e;
+  --status-warning-bg: #fef8eb;
+  --status-error: #c95953;
+  --status-error-bg: #fef2ef;
+
+  /* ── Spacing ── */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+
+  /* ── Border Radius (soft, card-forward, matches rounded app shell) ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* ============================================================
+   BASE TYPOGRAPHY
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-weight: var(--font-weight-bold);
+  font-size: 3rem;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-weight: var(--font-weight-semibold);
+  font-size: 2.25rem;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.5rem;
+}
+h4 {
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.25rem;
+}
+
+p,
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+}
+
+body {
+  background-color: var(--bg-secondary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* ============================================================
+   GLOBAL BUTTON STYLES  (reusable across all sections)
+   ============================================================ */
+
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--btn-primary-shadow);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+  background-color: var(--btn-primary-active);
+  transform: translateY(0);
+}
+
+.btn-accent {
+  background-color: var(--btn-accent-bg);
+  color: var(--btn-accent-text);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--btn-accent-shadow);
+}
+
+.btn-accent:hover {
+  background-color: var(--btn-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-accent:active {
+  background-color: var(--btn-accent-active);
+  transform: translateY(0);
+}
+
+.btn-coral {
+  background-color: var(--btn-coral-bg);
+  color: var(--btn-coral-text);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--btn-coral-shadow);
+}
+
+.btn-coral:hover {
+  background-color: var(--btn-coral-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-coral:active {
+  background-color: var(--btn-coral-active);
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 2px solid var(--btn-secondary-border);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+}
+
+.btn-outline {
+  background-color: var(--btn-outline-bg);
+  color: var(--btn-outline-text);
+  border: 2px solid var(--btn-outline-border);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-outline:hover {
+  background-color: var(--btn-outline-hover-bg);
+  color: var(--btn-outline-hover-text);
+}
+
+.btn-ghost {
+  background-color: var(--btn-ghost-bg);
+  color: var(--btn-ghost-text);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-ghost:hover {
+  background-color: var(--btn-ghost-hover);
+}
+
+/* ============================================================
+   CARD SURFACE  (matches the rounded, soft-shadow app shell
+   used across Home / Recipe / Meal Planner screens)
+   ============================================================ */
+
+.card {
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-green {
+  background-color: var(--bg-tint-green);
+  color: var(--color-primary-dark);
+}
+
+.badge-gold {
+  background-color: var(--bg-tint-gold);
+  color: var(--color-accent-dark);
+}
+
+.badge-coral {
+  background-color: var(--bg-tint-coral);
+  color: var(--color-coral-dark);
+}
+
+/* ============================================================
+   UI GRID DISPLAY
+   ============================================================ */
+
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  #root {
+    /* background-color: rgba(66, 221, 66, 0.155); */
+    display: grid;
+    grid-template-rows: 80px auto;
+    height: 100vh;
   }
+}
 
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #root {
+    /* background-color: rgba(88, 18, 253, 0.163); */
+    grid-template-columns: 200px auto;
+    grid-template-rows: auto;
+    height: 100vh;
+  }
+}
+
+/* ============================================================
+   404 Page
+   ============================================================ */
+
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  .page-not-found {
+    background-image: url("./assets/images/bg404.png");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .btn-container {
+    width: 450px;
     display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
+    justify-content: space-between;
+    position: relative;
+    top: 65%;
+    left: 35%;
   }
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
+/* ============================================================
+   SCREEN SIZES EXAMPLES
+   ============================================================ */
 
-.ticks {
-  position: relative;
-  width: 100%;
+/* Small devices (tiny screens and up, 176px and up) */
+/* @media (min-width: 176px) { */
+/* body {background-color: green;} */
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+/* } */
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
-}
+/* Medium devices (tablets, 768px and up) */
+/* @media (min-width: 768px) { */
+/* body {background-color: rgb(71, 17, 195);} */
+
+/* } */
+
+/* Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { */
+/* body {background-color: rgb(242, 118, 192);} */
+
+/* } */
+
+/* Extra large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) {
+ body {background-color: rgb(101, 217, 233);}
+  
+} */
+
+/* Extra extra large devices (larger desktops, 1400px and up) */
+/* @media (min-width: 1400px) {
+ body {background-color: rgb(144, 111, 221);}
+  
+} */

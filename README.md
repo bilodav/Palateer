@@ -2,6 +2,8 @@
 
 ## Explore. Plan. Cook.
 
+[![View App](https://img.shields.io/badge/▶_View_App-Palateer-b6d7a8?style=for-the-badge)](https://bilodav.github.io/Palateer/)
+
 A responsive React application for browsing recipes, planning a week of
 meals, and saving favorites. Built for a local cooking school's capstone
 project, demonstrating component architecture, hooks-based state

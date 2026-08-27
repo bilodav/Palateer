@@ -1,0 +1,149 @@
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  nav {
+    background-color: var(--bg-tint-nav);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-container {
+    height: 60px;
+    width: 60px;
+    background-image: url("../../assets/images/logoSmall.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .link-box {
+    width: 250px;
+    height: 40px;
+    padding: 5px;
+    margin: -55px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-inset);
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    color: var(--text-accent);
+    height: 30px;
+    padding: 5px;
+    width: 55px;
+    transition: var(--transition-base);
+  }
+  .link:first-of-type {
+    margin-left: 15px;
+  }
+  .link:hover {
+    color: var(--text-muted);
+    transform: translateX(-35px);
+  }
+
+  .link svg {
+    margin-right: 15px;
+    fill: var(--text-accent);
+  }
+
+  .label {
+    display: none;
+  }
+
+  .link:hover .label {
+    display: block;
+  }
+
+  .active svg {
+    fill: var(--btn-coral-bg);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  nav {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+  }
+
+  .logo-container {
+    background-image: url("../../assets/images/logoLarge.png");
+    height: 150px;
+    width: 90%;
+  }
+
+  .link-box {
+    width: 80%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0%;
+    border: none;
+  }
+  .link-box::after {
+    content: "";
+    margin-top: 20px;
+    width: 65%;
+    height: 2px;
+    background-color: black;
+  }
+
+  .link {
+    width: 150px;
+    margin-bottom: 10px;
+  }
+
+  .link:first-of-type {
+    margin-left: 0px;
+  }
+
+  .link:hover {
+    color: var(--text-muted);
+    transform: translateX(5px);
+  }
+
+  .label {
+    display: block;
+  }
+
+  .active {
+    background-color: var(--bg-tint-green);
+    border-radius: var(--radius-md);
+  }
+
+  .active svg {
+    fill: var(--text-accent);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { */
+/* body {background-color: rgb(242, 118, 192);} */
+
+/* } */
+
+/* Extra large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) {
+ body {background-color: rgb(101, 217, 233);}
+  
+} */
+
+/* Extra extra large devices (larger desktops, 1400px and up) */
+/* @media (min-width: 1400px) {
+ body {background-color: rgb(144, 111, 221);}
+  
+} */
