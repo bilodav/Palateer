@@ -1,8 +1,28 @@
+import { useFavorites } from "../components/context/FavoritesContext";
+import Card from "../components/ui/Card";
+import { recipesData } from "../data/recipesData";
+
 function FavoritesPage() {
+  const { isFavorite } = useFavorites();
   return (
-    <>
-      <h1>All your fav</h1>
-    </>
+    <section
+      style={{ marginLeft: "50px", maxHeight: "100vh", overflow: "auto" }}
+    >
+      <h1>Favorites</h1>
+      {recipesData
+        .filter((recipe) => isFavorite(recipe.id))
+        .map((recipe) => (
+          <Card
+            key={recipe.id}
+            id={recipe.id}
+            title={recipe.title}
+            image={"../src/assets/images/recipes/" + recipe.image}
+            cookingTime={recipe.cookTime}
+            servings={recipe.servings}
+            difficulty={recipe.difficulty}
+          />
+        ))}
+    </section>
   );
 }
 

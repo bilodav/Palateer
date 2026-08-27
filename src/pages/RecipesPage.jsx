@@ -1,4 +1,6 @@
 import { recipesData } from "../data/recipesData";
+import Favorite from "../components/ui/Favorite";
+import Card from "../components/ui/Card";
 
 function RecipesPage() {
   return (
@@ -7,25 +9,15 @@ function RecipesPage() {
     >
       <h1>recipes</h1>
       {recipesData.map((recipe) => (
-        <>
-          <p>{recipe.id}</p>
-          <h2>{recipe.title}</h2>
-          <p>{recipe.cookTime}</p>
-          <img
-            src={`../src/assets/images/recipes/${recipe.image}`}
-            alt="food"
-          />
-          <ul style={{ listStyleType: "disc" }}>
-            {recipe.ingredients.map((ing) => (
-              <li>{ing}</li>
-            ))}
-          </ul>
-          <ol style={{ listStyleType: "number", marginBottom: "20px" }}>
-            {recipe.instructions.map((ing) => (
-              <li>{ing}</li>
-            ))}
-          </ol>
-        </>
+        <Card
+          key={recipe.id}
+          id={recipe.id}
+          title={recipe.title}
+          image={"../src/assets/images/recipes/" + recipe.image}
+          cookingTime={recipe.cookTime}
+          servings={recipe.servings}
+          difficulty={recipe.difficulty}
+        />
       ))}
     </section>
   );

@@ -6,18 +6,24 @@ import MealPlannerPage from "./pages/MealPlannerPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
+import { FavoritesProvider } from "./components/context/FavoritesContext";
+import { MealPlannerProvider } from "./components/context/MealPlannerContext";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/meal-planner" element={<MealPlannerPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <FavoritesProvider>
+        <MealPlannerProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes" element={<RecipesPage />} />
+            <Route path="/meal-planner" element={<MealPlannerPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MealPlannerProvider>
+      </FavoritesProvider>
     </>
   );
 }
