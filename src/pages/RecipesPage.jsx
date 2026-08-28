@@ -1,15 +1,16 @@
 import { recipesData } from "../data/recipesData";
-import Favorite from "../components/ui/Favorite";
-import Card from "../components/ui/Card";
+import { useNavigate } from "react-router-dom";
+import RecipeCard from "../components/recipe/RecipeCard";
 
 function RecipesPage() {
+  const navigate = useNavigate();
   return (
     <section
       style={{ marginLeft: "50px", maxHeight: "100vh", overflow: "auto" }}
     >
       <h1>recipes</h1>
       {recipesData.map((recipe) => (
-        <Card
+        <RecipeCard
           key={recipe.id}
           id={recipe.id}
           title={recipe.title}
@@ -17,6 +18,7 @@ function RecipesPage() {
           cookingTime={recipe.cookTime}
           servings={recipe.servings}
           difficulty={recipe.difficulty}
+          onNavigate={() => navigate(`/recipes/${recipe.id}`)}
         />
       ))}
     </section>

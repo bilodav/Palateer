@@ -5,6 +5,7 @@ import RecipesPage from "./pages/RecipesPage";
 import MealPlannerPage from "./pages/MealPlannerPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import NotFound from "./pages/NotFound";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 import "./App.css";
 import { FavoritesProvider } from "./components/context/FavoritesContext";
 import { MealPlannerProvider } from "./components/context/MealPlannerContext";
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipesPage />} />
+            <Route path="/recipes/:id" element={<RecipeDetailPage />} />
             <Route path="/meal-planner" element={<MealPlannerPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="*" element={<NotFound />} />
