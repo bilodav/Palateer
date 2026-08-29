@@ -1,4 +1,9 @@
 import styles from "./Recipe.module.css";
+import Favorite from "../ui/Favorite";
+import { useFavorites } from "../context/FavoritesContext";
+import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
+import VideoPlayer from "../media/VideoPlayer";
 function RecipeDetail({
   recipe: {
     id,
@@ -12,19 +17,37 @@ function RecipeDetail({
     videoUrl,
     instructions,
   },
-  imageRoute,
+  imageUrl,
 }) {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const navigate = useNavigate();
   return (
     <div className={styles["recipe-detail"]}>
       <div
         style={{
-          backgroundImage: `url(${imageRoute}${image})`,
+          backgroundImage: `url(${imageUrl})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
-        className={styles["recipe-details-image"]}
-      ></div>
-      <div className={styles["recipe-details-info"]}>
+        className={styles["recipe-detail-image"]}
+      >
+        <VideoPlayer videoUrl={videoUrl} className={styles["video-button"]} />
+        <Button
+          className={`btn-accent ${styles["btn-return"]}`}
+          text="<-"
+          onClick={() => navigate("/recipes")}
+        />
+        <Favorite
+          isFull={isFavorite(id)}
+          className={styles["favorite"]}
+          size="40px"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorite(id);
+          }}
+        />
+      </div>
+      <div className={styles["recipe-detail-info"]}>
         <h2>{title}</h2>
         <div className={styles["card-details"]}>
           <span>

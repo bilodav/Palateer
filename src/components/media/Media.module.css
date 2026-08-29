@@ -1,0 +1,42 @@
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  dialog {
+    position: absolute;
+    border: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    overflow: hidden;
+    padding: 0;
+    margin: auto;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.383);
+  }
+
+  .iframe {
+    width: 90vw;
+    height: 80vh;
+  }
+  .video-player .btn-close {
+    position: relative;
+    padding: 10px 15px;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-size: 2rem;
+  }
+  .video-player .btn-play {
+    padding: 10px 20px;
+    font-size: large;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* body {background-color: rgb(71, 17, 195);} */
+  .video-player .btn-play {
+    padding: 15px 50px;
+    font-size: large;
+  }
+}

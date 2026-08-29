@@ -50,3 +50,69 @@ export function saveToStorage(key, value) {
     console.error(`Failed to save "${key}" to localStorage`, err);
   }
 }
+
+/**
+ * Statically imports every recipe image under `src/assets/images/recipes/`
+ * so Vite can process, hash, and bundle them correctly for production.
+ *
+ * `import.meta.glob` requires a static string literal pattern (no variables)
+ * since Vite scans it at build time.
+ *
+ * `eager: true`  -> imports are resolved immediately (no dynamic `import()`,
+ *                   simplest option when the number of images is modest).
+ * `import: "default"` -> returns the resolved URL string directly instead of
+ *                   the full module object (`{ default: url }`).
+ *
+ * Resulting shape of `imageModules`:
+ * {
+ *   "../assets/images/recipes/recipe-1.jpg": "/assets/recipe-1-a1b2c3.jpg",
+ *   "../assets/images/recipes/recipe-2.jpg": "/assets/recipe-2-d4e5f6.jpg",
+ *   ...
+ * }
+ *
+ * @type {Record<string, string>}
+ */
+const imageModules = import.meta.glob(
+  "../assets/images/recipes/*.{png,jpg,jpeg,svg,webp}",
+  {
+    eager: true,
+    import: "default",
+  },
+);
+
+/**
+ * Lookup table mapping a bare filename (e.g. "recipe-1.jpg") to its
+ * resolved, hashed build URL, so callers can look up an image without
+ * knowing or caring about the full glob path.
+ *
+ * @type {Record<string, string>}
+ */
+const imagesByFilename = Object.fromEntries(
+  Object.entries(imageModules).map(([path, url]) => [
+    path.split("/").pop(),
+    url,
+  ]),
+);
+
+/**
+ * Fallback image shown whenever a recipe's `image` field doesn't match
+ * any file found by the glob above (missing asset, typo, unmapped id, etc).
+ */
+import placeholder from "../assets/images/placeholder.jpg";
+
+/**
+ * Resolve a recipe's `image` field to a real, bundler-safe image URL.
+ *
+ * @param {string} image - The recipe's raw `image` field, expected to be a
+ *   bare filename (e.g. `"recipe-1.jpg"`) matching a file in
+ *   `src/assets/images/recipes/`.
+ * @returns {string} The resolved image URL, or the placeholder URL if no
+ *   matching file was found.
+ *
+ * @example
+ * getRecipeImage("recipe-1.jpg"); // -> "/assets/recipe-1-a1b2c3.jpg"
+ * getRecipeImage("missing.jpg");  // -> placeholder URL
+ */
+export function getRecipeImage(image) {
+  return imagesByFilename[image] || placeholder;
+}

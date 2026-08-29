@@ -1,6 +1,7 @@
 import { recipesData } from "../data/recipesData";
 import { useNavigate } from "react-router-dom";
 import RecipeCard from "../components/recipe/RecipeCard";
+import { getRecipeImage } from "../utils/helpers";
 
 function RecipesPage() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function RecipesPage() {
           key={recipe.id}
           id={recipe.id}
           title={recipe.title}
-          image={"../src/assets/images/recipes/" + recipe.image}
+          image={getRecipeImage(recipe.image)}
           cookingTime={recipe.cookTime}
           servings={recipe.servings}
           difficulty={recipe.difficulty}

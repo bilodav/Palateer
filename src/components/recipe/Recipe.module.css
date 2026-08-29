@@ -27,14 +27,14 @@
     padding: 5px;
   }
 
-  .favorite {
+  .recipe-card .favorite {
     position: relative;
     display: inline-block;
     left: 80%;
     top: 10%;
   }
 
-  .favorite::before {
+  .recipe-card .favorite::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -47,13 +47,13 @@
     z-index: 0;
   }
 
-  .favorite svg {
+  .recipe-card .favorite svg {
     position: relative;
     z-index: 1;
     transition: var(--transition-slow);
   }
 
-  .favorite:hover svg {
+  .recipe-card .favorite:hover svg {
     position: relative;
     z-index: 1;
     transform: rotateZ(213deg);
@@ -90,17 +90,17 @@
 
 /* Small devices (tiny screens and up, 176px and up) */
 @media (min-width: 176px) {
-  .recipe-details {
+  .recipe-detail {
     width: 100%;
     height: auto;
   }
 
-  .recipe-details-image {
+  .recipe-detail-image {
     width: 100%;
     height: 500px;
   }
 
-  .recipe-details-info {
+  .recipe-detail-info {
     position: relative;
     z-index: 1;
     top: -20px;
@@ -110,5 +110,82 @@
     background-color: var(--bg-secondary);
     padding: 20px;
     box-sizing: border-box;
+  }
+
+  .recipe-detail .btn-return {
+    position: relative;
+    display: inline;
+    top: 0%;
+    left: 2%;
+    padding: 10px;
+    width: 15%;
+    max-width: 110px;
+  }
+
+  .recipe-detail .favorite {
+    position: relative;
+    display: inline-block;
+    left: 85%;
+    top: -8%;
+  }
+
+  .recipe-detail .favorite::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(105, 105, 72);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .recipe-detail .favorite svg {
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-slow);
+  }
+
+  .recipe-detail .favorite:hover svg {
+    position: relative;
+    z-index: 1;
+    transform: rotateZ(213deg);
+  }
+  .recipe-detail .video-button {
+    position: relative;
+    top: 80%;
+    left: 2%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* body {background-color: rgb(71, 17, 195);} */
+  .recipe-detail .favorite {
+    left: 90%;
+  }
+  .recipe-detail-image {
+    width: 100%;
+    height: 500px;
+  }
+
+  .recipe-detail .btn-return {
+    position: relative;
+    display: inline;
+    top: 0%;
+    left: 2%;
+    padding: 10px;
+    width: 110px;
+  }
+
+  .recipe-detail .btn-return::after {
+    content: " Go Back";
+  }
+
+  .recipe-detail .video-button {
+    position: relative;
+    top: 80%;
   }
 }
