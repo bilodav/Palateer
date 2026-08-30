@@ -16,7 +16,7 @@ function FavoritesPage() {
             key={recipe.id}
             id={recipe.id}
             title={recipe.title}
-            image={"../src/assets/images/recipes/" + recipe.image}
+            image={recipe.image}
             cookingTime={recipe.cookTime}
             servings={recipe.servings}
             difficulty={recipe.difficulty}

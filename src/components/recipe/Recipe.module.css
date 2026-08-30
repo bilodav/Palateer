@@ -23,6 +23,15 @@
     border-radius: var(--radius-md);
   }
 
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    display: block;
+    position: relative;
+  }
+
   .card-info {
     padding: 5px;
   }
@@ -31,7 +40,7 @@
     position: relative;
     display: inline-block;
     left: 80%;
-    top: 10%;
+    top: -85%;
   }
 
   .recipe-card .favorite::before {
@@ -90,6 +99,13 @@
 
 /* Small devices (tiny screens and up, 176px and up) */
 @media (min-width: 176px) {
+  .recipe-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    display: block;
+  }
   .recipe-detail {
     width: 100%;
     height: auto;
@@ -110,12 +126,13 @@
     background-color: var(--bg-secondary);
     padding: 20px;
     box-sizing: border-box;
+    background-color: var(--bg-primary);
   }
 
   .recipe-detail .btn-return {
     position: relative;
     display: inline;
-    top: 0%;
+    top: -100%;
     left: 2%;
     padding: 10px;
     width: 15%;
@@ -126,7 +143,7 @@
     position: relative;
     display: inline-block;
     left: 85%;
-    top: -8%;
+    top: -108%;
   }
 
   .recipe-detail .favorite::before {
@@ -155,8 +172,35 @@
   }
   .recipe-detail .video-button {
     position: relative;
-    top: 80%;
+    top: -25%;
     left: 2%;
+  }
+  .recipe-details {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-bottom: 20px;
+  }
+
+  .recipe-details-block span:first-of-type {
+    display: block;
+    color: var(--text-primary);
+    font-size: larger;
+    font-weight: 800;
+  }
+  .recipe-details-block span:last-of-type {
+    display: block;
+    font-size: smaller;
+    font-weight: 700;
+  }
+
+  .recipe-details-group {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    padding-top: 50px;
   }
 }
 
@@ -174,7 +218,7 @@
   .recipe-detail .btn-return {
     position: relative;
     display: inline;
-    top: 0%;
+    top: -100%;
     left: 2%;
     padding: 10px;
     width: 110px;
@@ -186,6 +230,13 @@
 
   .recipe-detail .video-button {
     position: relative;
-    top: 80%;
+    top: -25%;
+  }
+
+  .recipe-details-group {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 20%;
   }
 }

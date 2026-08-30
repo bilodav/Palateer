@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { recipesData } from "../data/recipesData";
 import RecipeDetail from "../components/recipe/RecipeDetail";
-import { getRecipeImage } from "../utils/helpers";
 
 function RecipeDetailPage() {
   const { id } = useParams();
@@ -15,7 +14,7 @@ function RecipeDetailPage() {
         overflowX: "hidden",
       }}
     >
-      <RecipeDetail recipe={recipe} imageUrl={getRecipeImage(recipe.image)} />
+      <RecipeDetail recipe={recipe} />
     </section>
   );
 }

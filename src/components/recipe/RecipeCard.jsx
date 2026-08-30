@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import Favorite from "../ui/Favorite";
 import styles from "./Recipe.module.css";
@@ -12,16 +13,21 @@ function RecipeCard({
   servings,
 }) {
   const { isFavorite, toggleFavorite } = useFavorites();
+  const [hasError, setHasError] = useState(false);
+
+  // Reset error state if the image prop changes (e.g. list re-filters)
+  useEffect(() => {
+    setHasError(false);
+  }, [image]);
+
   return (
     <div className={styles["recipe-card"]} id={id} onClick={onNavigate}>
-      <div
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-        className={styles["card-image"]}
-      >
+      <div className={styles["card-image"]}>
+        <img
+          src={hasError ? "/assets/images/placeholder.jpg" : image}
+          alt={title}
+          onError={() => setHasError(true)}
+        />
         <Favorite
           isFull={isFavorite(id)}
           className={styles["favorite"]}

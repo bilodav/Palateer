@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
 
 function Button({
+  title,
   className = "btn-primary",
   text = "click me",
   onClick = () => {},
 }) {
   return (
-    <button className={className} onClick={onClick}>
+    <button title={title} className={className} onClick={onClick}>
       {text}
     </button>
   );
 }
 
 Button.PropTypes = {
+  title: PropTypes.string,
   className: PropTypes.string,
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,

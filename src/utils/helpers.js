@@ -52,67 +52,69 @@ export function saveToStorage(key, value) {
 }
 
 /**
- * Statically imports every recipe image under `src/assets/images/recipes/`
- * so Vite can process, hash, and bundle them correctly for production.
+ * Capitalizes the first character of a string.
  *
- * `import.meta.glob` requires a static string literal pattern (no variables)
- * since Vite scans it at build time.
- *
- * `eager: true`  -> imports are resolved immediately (no dynamic `import()`,
- *                   simplest option when the number of images is modest).
- * `import: "default"` -> returns the resolved URL string directly instead of
- *                   the full module object (`{ default: url }`).
- *
- * Resulting shape of `imageModules`:
- * {
- *   "../assets/images/recipes/recipe-1.jpg": "/assets/recipe-1-a1b2c3.jpg",
- *   "../assets/images/recipes/recipe-2.jpg": "/assets/recipe-2-d4e5f6.jpg",
- *   ...
- * }
- *
- * @type {Record<string, string>}
- */
-const imageModules = import.meta.glob(
-  "../assets/images/recipes/*.{png,jpg,jpeg,svg,webp}",
-  {
-    eager: true,
-    import: "default",
-  },
-);
-
-/**
- * Lookup table mapping a bare filename (e.g. "recipe-1.jpg") to its
- * resolved, hashed build URL, so callers can look up an image without
- * knowing or caring about the full glob path.
- *
- * @type {Record<string, string>}
- */
-const imagesByFilename = Object.fromEntries(
-  Object.entries(imageModules).map(([path, url]) => [
-    path.split("/").pop(),
-    url,
-  ]),
-);
-
-/**
- * Fallback image shown whenever a recipe's `image` field doesn't match
- * any file found by the glob above (missing asset, typo, unmapped id, etc).
- */
-import placeholder from "../assets/images/placeholder.jpg";
-
-/**
- * Resolve a recipe's `image` field to a real, bundler-safe image URL.
- *
- * @param {string} image - The recipe's raw `image` field, expected to be a
- *   bare filename (e.g. `"recipe-1.jpg"`) matching a file in
- *   `src/assets/images/recipes/`.
- * @returns {string} The resolved image URL, or the placeholder URL if no
- *   matching file was found.
+ * @param {string} str - The string to capitalize.
+ * @returns {string} The input string with its first character uppercased,
+ *   or an empty string if `str` is not a non-empty string.
  *
  * @example
- * getRecipeImage("recipe-1.jpg"); // -> "/assets/recipe-1-a1b2c3.jpg"
- * getRecipeImage("missing.jpg");  // -> placeholder URL
+ * capitalizeString("hello"); // "Hello"
+ * capitalizeString("");      // ""
+ * capitalizeString(null);    // ""
  */
-export function getRecipeImage(image) {
-  return imagesByFilename[image] || placeholder;
+export function capitalizeString(str) {
+  if (typeof str !== "string" || str.length === 0) return;
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+// DATE HELPERS
+export const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+// A helper function that get the start of any week you are currently in
+export function startOfWeek(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // returns a num
+  const diff = (day === 0 ? -6 : 1) - day; //Shifts to monday
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+// A helper function to add day to an initial starting days
+export function addDays(date, n) {
+  const d = new Date(date); // d is now a new date object that is cloned from date
+  d.setDate(d.getDate() + n); // mutating d, not the original date
+  return d;
+}
+
+//A helper function to see if to dates are the same
+export function isSameDay(a, b) {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
+
+export function rangeFormat(start) {
+  const end = addDays(start, 6);
+  if (start.getMonth() === end.getMonth()) {
+    return `${MONTHS[start.getMonth()]} ${start.getDate()}–${end.getDate()}, ${start.getFullYear()}`;
+  }
+  return `${MONTHS[start.getMonth()]} ${start.getDate()} – ${MONTHS[end.getMonth()]} ${end.getDate()}, ${start.getFullYear()}`;
 }

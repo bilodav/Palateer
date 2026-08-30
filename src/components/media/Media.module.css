@@ -14,7 +14,8 @@
     background-color: rgba(0, 0, 0, 0.383);
   }
 
-  .iframe {
+  .iframe,
+  video {
     width: 90vw;
     height: 80vh;
   }
@@ -24,7 +25,7 @@
     position: absolute;
     top: 2%;
     left: 2%;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .video-player .btn-play {
     padding: 10px 20px;
