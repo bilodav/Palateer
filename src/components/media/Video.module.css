@@ -1,0 +1,22 @@
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  .iframe,
+  video {
+    width: 90vw;
+    height: 80vh;
+  }
+
+  .video-player .btn-play {
+    padding: 10px 20px;
+    font-size: large;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* body {background-color: rgb(71, 17, 195);} */
+  .video-player .btn-play {
+    padding: 15px 50px;
+    font-size: large;
+  }
+}

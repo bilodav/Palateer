@@ -16,18 +16,18 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    margin-left: 20px;
+    margin-left: 0px;
     margin-top: 10px;
   }
 
   .link-box {
-    width: 250px;
+    width: 320px;
     height: 40px;
     padding: 5px;
     margin: -55px auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-inset);
@@ -35,28 +35,26 @@
 
   .link {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    color: var(--text-accent);
     height: 30px;
     padding: 5px;
     width: 55px;
     transition: var(--transition-base);
   }
-  .link:first-of-type {
-    margin-left: 15px;
-  }
-  .link:hover {
-    color: var(--text-muted);
-    transform: translateX(-35px);
-  }
 
   .link svg {
-    margin-right: 15px;
     color: var(--color-ink);
+    display: block;
+    text-align: center;
   }
 
   .label {
-    display: none;
+    display: block;
+    font-size: 0.65rem;
+    text-align: center;
+    color: var(--text-muted);
+    text-wrap: nowrap;
   }
 
   .link:hover .label {
@@ -88,6 +86,8 @@
     background-image: url("../../assets/images/logoLarge.png");
     height: 150px;
     width: 75%;
+    margin-top: -10px;
+    margin-left: 20px;
   }
 
   .link-box::before {
@@ -119,6 +119,7 @@
     width: 150px;
     margin-bottom: 10px;
     color: var(--color-ink);
+    flex-direction: row;
   }
 
   .link:first-of-type {
@@ -132,6 +133,8 @@
 
   .label {
     display: block;
+    font-size: 0.8rem;
+    margin-left: 10px;
   }
 
   .active {
@@ -142,6 +145,10 @@
 
   .active svg {
     fill: var(--text-accent);
+  }
+
+  .active .label {
+    color: var(--text-accent);
   }
 
   .nav-filler {

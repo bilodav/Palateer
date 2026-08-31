@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import List from "../ui/List";
 import TabList from "../ui/TabList";
 import { capitalizeString } from "../../utils/helpers";
+import MealPicker from "../mealPlanner/MealPicker";
 function RecipeDetail({
   recipe: {
     id,
@@ -106,12 +107,7 @@ function RecipeDetail({
               />,
             ]}
           />
-          <div className={styles["recipe-meal-plan"]}>
-            <h3>Meal Plan</h3>
-            <input />
-            <input />
-            <input />
-          </div>
+          <MealPicker />
         </div>
       </div>
     </div>

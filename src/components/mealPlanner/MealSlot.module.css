@@ -1,0 +1,66 @@
+@media (min-width: 176px) {
+  /* body {background-color: green;} */
+  .meal-slot {
+    height: 180px;
+    width: 100%;
+    padding: 30px;
+    margin-bottom: 10px;
+  }
+
+  .label {
+    font-weight: 800;
+    color: var(--color-ink);
+    padding-bottom: 5px;
+  }
+
+  .meal-slot-card {
+    height: 100%;
+    width: 90%;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  .meal-slot-card img {
+    height: 100%;
+    width: 250px;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+  }
+
+  .title {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .options {
+    width: 40px;
+    height: 40px;
+    rotate: 90deg;
+    align-self: flex-start;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: 15px;
+    transition: var(--transition-base);
+  }
+
+  .options:hover {
+    color: var(--text-muted);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+/* @media (min-width: 768px) { */
+/* body {background-color: rgb(71, 17, 195);} */
+
+/* } */

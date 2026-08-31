@@ -1,0 +1,23 @@
+@media (min-width: 176px) {
+  dialog {
+    position: absolute;
+    border: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    overflow: hidden;
+    padding: 0;
+    margin: auto;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.383);
+  }
+  dialog .btn-close {
+    position: relative;
+    padding: 5px 15px;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-size: 1.5rem;
+  }
+}

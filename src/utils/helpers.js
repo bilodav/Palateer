@@ -118,3 +118,7 @@ export function rangeFormat(start) {
   }
   return `${MONTHS[start.getMonth()]} ${start.getDate()} – ${MONTHS[end.getMonth()]} ${end.getDate()}, ${start.getFullYear()}`;
 }
+
+function findRecipe(id) {
+  re;
+}

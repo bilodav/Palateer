@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Button from "../ui/Button";
-import styles from "./Media.module.css";
+import Modal from "../ui/Modal.jsx";
+import styles from "./Video.module.css";
 function VideoPlayer({ videoUrl, className }) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -11,27 +12,10 @@ function VideoPlayer({ videoUrl, className }) {
 
   const isURL = videoRegex.test(videoUrl);
 
-  //   Using a "ref" to act as a direct pointer to the <dialog> element to call the showModal/close
-  const dialogRef = useRef(null);
-
-  //   Anytime isOpen changes the dialog element will open or close using the useEffect
-  useEffect(() => {
-    const d = dialogRef.current;
-    if (isOpen) {
-      d.showModal();
-    } else {
-      d.close();
-    }
-  }, [isOpen]);
-
   const toggleIsOpen = () => {
     setIsOpen((p) => !p);
   };
-
-  // Reset error state everytime the dialog is closed or opened or url changes
-  useEffect(() => {
-    setHasError(false);
-  }, [videoUrl, isOpen]);
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div className={`${className} ${styles["video-player"]}`}>
@@ -42,21 +26,7 @@ function VideoPlayer({ videoUrl, className }) {
         title="Watch Recipe Video"
       />
 
-      {/* Native dialog methods should also change the state correctly to be true */}
-      <dialog
-        ref={dialogRef}
-        onClose={() => setIsOpen(false)}
-        onClick={(e) => {
-          if (e.target === dialogRef.current) {
-            toggleIsOpen();
-          }
-        }}
-      >
-        <Button
-          className={`btn-coral ${styles["btn-close"]} `}
-          text="X"
-          onClick={toggleIsOpen}
-        />
+      <Modal isOpen={isOpen} onClose={closeModal}>
         {/* Conditionally rendering the iframe if the path is a url and also so that it unmounts on dialog close and video stops */}
         {isOpen && isURL && (
           <iframe
@@ -84,7 +54,7 @@ function VideoPlayer({ videoUrl, className }) {
             </p>
           </div>
         )}
-      </dialog>
+      </Modal>
     </div>
   );
 }

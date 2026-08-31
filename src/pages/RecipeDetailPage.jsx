@@ -9,7 +9,6 @@ function RecipeDetailPage() {
     <section
       style={{
         maxHeight: "100vh",
-        width: "100%",
         overflowY: "auto",
         overflowX: "hidden",
       }}

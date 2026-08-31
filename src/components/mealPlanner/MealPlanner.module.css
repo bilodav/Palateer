@@ -3,11 +3,13 @@
   /* body {background-color: green;} */
   .meal-planner {
     background-color: var(--bg-primary);
+    height: fit-content;
   }
 
   .meal-planner h1 {
     text-align: center;
     font-size: 2.35rem;
+    margin-bottom: 5px;
   }
 
   .week-nav {
@@ -15,7 +17,7 @@
     max-width: 450px;
     display: flex;
     justify-content: space-around;
-    margin: 0 auto 20px;
+    margin: 0 auto 10px;
   }
 
   .meal-planner .btn-nav {
@@ -66,4 +68,7 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  .meal-planner h1 {
+    padding-top: 30px;
+  }
 }

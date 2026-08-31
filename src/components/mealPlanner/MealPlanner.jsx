@@ -6,6 +6,7 @@ import {
   startOfWeek,
 } from "../../utils/helpers";
 import Button from "../ui/Button";
+import DayCard from "./DayCard";
 import styles from "./MealPlanner.module.css";
 import { useState, useMemo } from "react";
 
@@ -23,6 +24,11 @@ function MealPlanner() {
   }
 
   const isCurrentWeek = weekDates.some((d) => isSameDay(d, today));
+
+  const dayMeal = {
+    date: "31/08/2026",
+    meals: [{ breakfast: 1 }, { lunch: 2 }, { dinner: 3 }],
+  };
 
   return (
     <div className={styles["meal-planner"]}>
@@ -69,31 +75,7 @@ function MealPlanner() {
           );
         })}
       </div>
-      <div>
-        <div>
-          <p>Breakfast</p>
-          <div>
-            <img src="/assets/images/placeholder.jpg" alt="" />
-            <span>Avocado Toast</span>
-            <div>options</div>
-          </div>
-        </div>
-        <div>
-          <p>Lunch</p>
-          <div>
-            <img src="/assets/images/placeholder.jpg" alt="" />
-            <span>add meal</span>
-          </div>
-        </div>{" "}
-        <div>
-          <p>Dinner </p>
-          <div>
-            <img src="/assets/images/placeholder.jpg" alt="" />
-            <span>Garlic Pasta</span>
-            <div>options</div>
-          </div>
-        </div>
-      </div>
+      <DayCard date={selectedDate} />
     </div>
   );
 }

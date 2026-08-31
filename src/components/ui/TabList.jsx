@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./UI.module.css";
+import styles from "./TabList.module.css";
 import { capitalizeString } from "../../utils/helpers";
 
 function TabList({ headers = [], content = [] }) {
