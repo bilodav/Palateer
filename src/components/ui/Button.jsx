@@ -5,9 +5,10 @@ function Button({
   className = "btn-primary",
   text = "click me",
   onClick = () => {},
+  type,
 }) {
   return (
-    <button title={title} className={className} onClick={onClick}>
+    <button type={type} title={title} className={className} onClick={onClick}>
       {text}
     </button>
   );

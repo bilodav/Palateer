@@ -25,11 +25,6 @@ function MealPlanner() {
 
   const isCurrentWeek = weekDates.some((d) => isSameDay(d, today));
 
-  const dayMeal = {
-    date: "31/08/2026",
-    meals: [{ breakfast: 1 }, { lunch: 2 }, { dinner: 3 }],
-  };
-
   return (
     <div className={styles["meal-planner"]}>
       <div>

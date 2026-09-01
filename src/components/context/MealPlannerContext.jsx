@@ -20,14 +20,53 @@ export function MealPlannerProvider({ children }) {
     setMealPlan((prev) => [...prev, entry]);
   };
 
-  const removeMeal = (date) => {
-    setMealPlan((prev) => prev.filter((entry) => entry.date !== date));
+  const removeMeal = (date, mealType) => {
+    setMealPlan((prev) =>
+      prev.map((entry) =>
+        entry.date === date
+          ? { ...entry, meal: { ...entry.meal, [mealType]: null } }
+          : entry,
+      ),
+    );
   };
 
   // A helper to look up whatever meal is planned for one specific date.
   // Returns undefined if nothing is planned for that date yet.
   const getMealForDate = (date) =>
     mealPlan.find((entry) => entry.date === date);
+
+  const updateMealSlot = (date, mealType, recipeId) => {
+    setMealPlan((prev) => {
+      const isExisting = prev.find((entry) => entry.date === date);
+      if (!isExisting) {
+        //There is no entry for this therefore it should be created
+        return [
+          ...prev,
+          {
+            date,
+            meal: {
+              breakfast: null,
+              lunch: null,
+              dinner: null,
+              [mealType]: recipeId, // After object created update the specific Id
+            },
+          },
+        ];
+      }
+      // if it exist return a new array with just the new slot merged in on the entry all other values are the same
+      return prev.map((entry) =>
+        entry.date === date
+          ? {
+              ...entry,
+              meal: {
+                ...entry.meal,
+                [mealType]: recipeId,
+              },
+            }
+          : entry,
+      );
+    });
+  };
 
   // Useing a useEffect so that whenever mealPlan changes it saves the new list to localStorage
   useEffect(() => {
@@ -37,7 +76,7 @@ export function MealPlannerProvider({ children }) {
   //   Return the context box so the children can have acces to the state
   return (
     <MealPlannerContext.Provider
-      value={{ mealPlan, addMeal, removeMeal, getMealForDate }}
+      value={{ mealPlan, addMeal, updateMealSlot, removeMeal, getMealForDate }}
     >
       {children}
     </MealPlannerContext.Provider>

@@ -127,6 +127,7 @@
     padding: 20px;
     box-sizing: border-box;
     background-color: var(--bg-primary);
+    padding: 20px 40px;
   }
 
   .recipe-detail .btn-return {
@@ -237,6 +238,6 @@
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
-    gap: 20%;
+    gap: 5%;
   }
 }

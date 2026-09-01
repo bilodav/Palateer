@@ -107,7 +107,7 @@ function RecipeDetail({
               />,
             ]}
           />
-          <MealPicker />
+          <MealPicker recipeId={id} />
         </div>
       </div>
     </div>
