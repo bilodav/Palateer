@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import Favorite from "../ui/Favorite";
-import styles from "./Recipe.module.css";
+import styles from "./RecipeCard.module.css";
 
 function RecipeCard({
   image,

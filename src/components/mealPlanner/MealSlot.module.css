@@ -69,6 +69,7 @@
     flex-direction: column;
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-md);
+    background-color: var(--bg-primary);
   }
 
   .options-active span {

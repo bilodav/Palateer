@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
+import { useFavorites } from "../context/FavoritesContext";
 
 const links = [
   {
@@ -27,6 +28,8 @@ const links = [
 
 function Navbar() {
   const navRef = useRef(null);
+  const { favoriteIds } = useFavorites();
+  const numOfFavs = favoriteIds.size;
 
   return (
     <nav ref={navRef}>
@@ -41,7 +44,14 @@ function Navbar() {
             }
           >
             <span dangerouslySetInnerHTML={{ __html: svg }} />
-            <span className={styles.label}> {label}</span>
+            <span className={styles.label}>
+              {label}
+              {label === "Favorites" && numOfFavs > 0 ? (
+                <span className={styles.counter}>{numOfFavs}</span>
+              ) : (
+                ""
+              )}
+            </span>
           </NavLink>
         ))}
       </div>
