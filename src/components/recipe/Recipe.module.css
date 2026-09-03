@@ -11,7 +11,7 @@
   }
   .recipe-detail {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   .recipe-detail-image {
@@ -24,10 +24,7 @@
     z-index: 1;
     top: -20px;
     width: 100%;
-    height: auto;
-    border-radius: var(--radius-xl);
-    background-color: var(--bg-secondary);
-    padding: 20px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     box-sizing: border-box;
     background-color: var(--bg-primary);
     padding: 20px 40px;

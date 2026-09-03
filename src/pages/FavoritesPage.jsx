@@ -3,10 +3,68 @@ import { useFavorites } from "../components/context/FavoritesContext";
 import RecipeCard from "../components/recipe/RecipeCard";
 import { recipesData } from "../data/recipesData";
 import styles from "./FavoritesPage.module.css";
+import SearchBar from "../components/ui/SearchBar";
+import { useState } from "react";
 
 function FavoritesPage() {
   const { isFavorite, favoriteIds } = useFavorites();
   const navigate = useNavigate();
+
+  const [searchValue, setSearchValue] = useState("");
+  const [searchByValue, setSearchByValue] = useState("");
+  const [sortBy, setSortBy] = useState("name-asc");
+
+  let favoriteRecipes = recipesData.filter((recipe) => isFavorite(recipe.id));
+
+  let searchRecipes;
+
+  if (searchByValue === "title" || searchByValue === "") {
+    searchRecipes = favoriteRecipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+  } else if (searchByValue === "ingredients") {
+    searchRecipes = favoriteRecipes.filter((recipe) =>
+      recipe.ingredients.some((ingredient) =>
+        ingredient.toLowerCase().includes(searchValue.toLowerCase()),
+      ),
+    );
+  }
+
+  const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
+
+  switch (sortBy) {
+    case "name-asc":
+      searchRecipes = [...searchRecipes].sort((a, b) =>
+        a.title.localeCompare(b.title),
+      );
+      break;
+    case "name-desc":
+      searchRecipes = [...searchRecipes].sort((a, b) =>
+        b.title.localeCompare(a.title),
+      );
+      break;
+    case "time-asc":
+      searchRecipes = [...searchRecipes].sort(
+        (a, b) => a.cookTime - b.cookTime,
+      );
+      break;
+    case "time-desc":
+      searchRecipes = [...searchRecipes].sort(
+        (a, b) => b.cookTime - a.cookTime,
+      );
+      break;
+    case "difficulty-asc":
+      searchRecipes = [...searchRecipes].sort(
+        (a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty],
+      );
+      break;
+    case "difficulty-desc":
+      searchRecipes = [...searchRecipes].sort(
+        (a, b) => difficultyOrder[b.difficulty] - difficultyOrder[a.difficulty],
+      );
+      break;
+  }
+
   return (
     <section className={styles["fav-page"]}>
       <div className={styles["header-search"]}>
@@ -29,25 +87,44 @@ function FavoritesPage() {
           </div>
         </div>
         <div className={styles["utility-group"]}>
-          <input className={styles["search-bar"]} type="text" name="" id="" />
-          <select className={styles["sort-bar"]} name="" id=""></select>
+          <SearchBar
+            searchBy={searchByValue}
+            onSearchBy={setSearchByValue}
+            onSearchChange={setSearchValue}
+            searchValue={searchValue}
+            onSortChange={setSortBy}
+            sortValue={sortBy}
+          />
         </div>
       </div>
-      <div className={styles["delete"]}>
-        {recipesData
-          .filter((recipe) => isFavorite(recipe.id))
-          .map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              id={recipe.id}
-              title={recipe.title}
-              image={recipe.image}
-              cookingTime={recipe.cookTime}
-              servings={recipe.servings}
-              difficulty={recipe.difficulty}
-              onNavigate={() => navigate(`/recipes/${recipe.id}`)}
-            />
-          ))}
+      <div className={styles["fav-display"]}>
+        {searchRecipes && (
+          <>
+            {(searchByValue || searchValue) && (
+              <p>Found {searchRecipes.length} Results</p>
+            )}
+            <div className={styles["fav-list"]}>
+              {searchRecipes.map((recipe) => (
+                <RecipeCard
+                  key={recipe.id}
+                  id={recipe.id}
+                  title={recipe.title}
+                  image={recipe.image}
+                  cookingTime={recipe.cookTime}
+                  servings={recipe.servings}
+                  difficulty={recipe.difficulty}
+                  onNavigate={() => navigate(`/recipes/${recipe.id}`)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        {favoriteRecipes.length > 0 && searchRecipes.length === 0 && (
+          <p>There is none that matches your search</p>
+        )}
+        {favoriteRecipes.length === 0 && (
+          <p>You have not yet picked any favorites</p>
+        )}
       </div>
     </section>
   );

@@ -12,7 +12,8 @@
 }
 
 .card-image {
-  width: 45%;
+  width: 350px;
+  max-width: 200px;
   height: 100%;
 }
 
@@ -31,6 +32,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.card-info h4 {
+  text-wrap: wrap;
 }
 
 .card-details {

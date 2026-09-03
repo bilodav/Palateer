@@ -3,11 +3,8 @@
   /* body {background-color: green;} */
   .fav-page {
     background-color: var(--bg-primary);
-    height: fit-content;
     overflow: auto;
     padding: 20px;
-    padding-bottom: 0;
-    height: 100vh;
   }
 
   .fav-page h1 {
@@ -34,23 +31,17 @@
     display: flex;
     justify-content: space-between;
   }
-  .search-bar {
-    width: 55%;
-    margin: 0;
-    padding: 0;
-  }
-  .sort-bar {
-    width: 40%;
-    margin: 0;
-    padding: 0;
+
+  .fav-display {
+    margin-top: 20px;
   }
 
-  .delete {
+  .fav-list {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 5px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 20px;
   }
 }
@@ -59,19 +50,19 @@
 @media (min-width: 768px) {
   /* body {background-color: rgb(71, 17, 195);} */
   .fav-page {
-    max-height: 100vh;
+    overflow-x: hidden;
+    padding: 40px;
   }
 
   .header-search {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 80px;
+    gap: 20px;
   }
 
   .utility-group {
     flex: 1;
-    align-self: flex-end;
+    margin-left: auto;
   }
 }
 

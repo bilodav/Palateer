@@ -84,6 +84,10 @@ function RecipeDetail({
             <span>{servings}</span>
             <span>Servings</span>
           </div>
+          <div className={styles["recipe-details-block"]}>
+            <span>{cuisine}</span>
+            <span>Cuisine</span>
+          </div>
         </div>
         <p>Perfect for {category}</p>
 
@@ -95,15 +99,15 @@ function RecipeDetail({
                 key={"instructions"}
                 list={instructions}
                 listStyleType={"decimal"}
-                checkedList={checkedList}
-                onToggle={toggleChecked}
                 ordered
-                checked
               />,
               <List
                 list={ingredients}
                 key={"ingredients"}
-                listStyleType={"decimal"}
+                listStyleType={"circle"}
+                checkedList={checkedList}
+                onToggle={toggleChecked}
+                checked
               />,
             ]}
           />
