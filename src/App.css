@@ -226,7 +226,7 @@ html {
   --shadow-md: 0 4px 10px rgba(33, 40, 50, 0.1);
   --shadow-lg: 0 10px 25px rgba(33, 40, 50, 0.14);
   --shadow-xl: 0 20px 40px rgba(33, 40, 50, 0.18);
-  --shadow-accent: 0 4px 14px rgba(63, 141, 50, 0.28);
+  --shadow-accent: 0 4px 14px rgba(64, 141, 50, 0.5);
   --shadow-coral: 0 4px 14px rgba(252, 108, 108, 0.3);
   --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 

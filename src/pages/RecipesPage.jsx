@@ -1,26 +1,25 @@
 import { recipesData } from "../data/recipesData";
-import { useNavigate } from "react-router-dom";
-import RecipeCard from "../components/recipe/RecipeCard";
+import styles from "./RecipesPage.module.css";
+import SearchBar from "../components/ui/SearchBar";
+import RecipeList from "../components/recipe/RecipeList";
+import FilterBar from "../components/ui/FilterBar";
 
 function RecipesPage() {
-  const navigate = useNavigate();
   return (
-    <section
-      style={{ marginLeft: "50px", maxHeight: "100vh", overflow: "auto" }}
-    >
-      <h1>recipes</h1>
-      {recipesData.map((recipe) => (
-        <RecipeCard
-          key={recipe.id}
-          id={recipe.id}
-          title={recipe.title}
-          image={recipe.image}
-          cookingTime={recipe.cookTime}
-          servings={recipe.servings}
-          difficulty={recipe.difficulty}
-          onNavigate={() => navigate(`/recipes/${recipe.id}`)}
-        />
-      ))}
+    <section className={styles["rec-page"]}>
+      <div className={styles["rec-banner"]}>
+        <h1>Recipes</h1>
+        <p>
+          Explore the full recipe collection, from everyday meals to special
+          occasion feasts, not forgetting those simple snacks
+        </p>
+      </div>
+      <div>
+        <div>
+          <SearchBar />
+        </div>
+        <RecipeList list={recipesData} />
+      </div>
     </section>
   );
 }

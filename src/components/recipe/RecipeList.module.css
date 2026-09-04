@@ -1,0 +1,23 @@
+/* Small devices (tiny screens and up, 176px and up) */
+@media (min-width: 176px) {
+  /* body {background-color: green;} */
+  .recipe-list {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* body {background-color: rgb(71, 17, 195);} */
+}
+
+/* Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { */
+/* body {background-color: rgb(242, 118, 192);} */
+
+/* } */

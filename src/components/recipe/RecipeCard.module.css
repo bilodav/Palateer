@@ -101,7 +101,7 @@
 
   .recipe-card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-accent);
   }
 
   .card-image {
@@ -131,10 +131,11 @@
     left: 50%;
     width: 30px;
     height: 30px;
-    background-color: rgb(105, 105, 72);
+    background-color: rgba(105, 105, 72, 0.7);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 0;
+    transition: var(--transition-slow);
   }
 
   .recipe-card .favorite svg {
@@ -146,7 +147,12 @@
   .recipe-card .favorite:hover svg {
     position: relative;
     z-index: 1;
-    transform: rotateZ(213deg);
+    transform: rotateZ(213deg) scale(1.5);
+  }
+
+  .recipe-card .favorite:hover::before {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: rgb(105, 105, 72);
   }
 }
 

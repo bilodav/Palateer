@@ -1,0 +1,19 @@
+.filter-bar {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-cats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.filter {
+  background-color: aqua;
+  height: fit-content;
+  padding: 1px 5px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+}
