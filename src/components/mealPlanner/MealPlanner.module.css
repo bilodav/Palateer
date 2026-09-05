@@ -64,11 +64,38 @@
     border: 2px solid var(--highlight-secondary);
     border-radius: var(--radius-md);
   }
+
+  .display-board {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-between;
+  }
+
+  .col-1 {
+    width: 95%;
+  }
+
+  .col-2 {
+    padding-top: 50px;
+    padding-left: 30px;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .meal-planner h1 {
     padding-top: 30px;
+  }
+
+  .col-1 {
+    width: 48%;
+    min-width: 400px;
+    max-width: 600px;
+  }
+
+  .col-2 {
+    padding-top: 35px;
+    width: 50%;
   }
 }

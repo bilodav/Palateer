@@ -33,6 +33,138 @@
     padding: 60px 0 10px 20px;
     margin-bottom: 0;
   }
+
+  .planned-meals-banner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    min-height: 50vh;
+    padding: 20px;
+    justify-content: space-between;
+  }
+
+  .meal-col {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .meal-col h3 {
+    padding-top: 30px;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  .meal-col p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+    padding-left: 10px;
+  }
+
+  .meal-planner {
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/images/mealPlanner.jpg");
+    background-position: center;
+    background-size: cover;
+    border-radius: var(--radius-xl);
+    padding: 30px 50px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .meal-planner h4 {
+    color: var(--text-primary);
+    width: 50%;
+    padding-top: 20%;
+    margin: 0 auto;
+  }
+
+  .dinner-card {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    border-radius: var(--radius-xl);
+    margin: 0 auto 20px;
+  }
+  .dinner-card img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--radius-xl);
+  }
+
+  .dinner-card span {
+    position: absolute;
+    top: 80%;
+    right: 5%;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-white);
+  }
+
+  .dinner-card button {
+    position: absolute;
+    padding: 5px 10px;
+    right: 5%;
+    top: 5%;
+  }
+
+  .cuisine-banner {
+    width: 100%;
+    height: auto;
+  }
+
+  .cuisine-banner h2 {
+    padding-top: 60px;
+    text-align: center;
+  }
+
+  .cuisine-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .breakfast-banner {
+    width: 100%;
+    padding-top: 60px;
+    height: 50vh;
+    border: var(--radius-xl) var(--radius-xl) 0 0;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .breakfast-banner h3 {
+    padding-left: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .breakfast-caption {
+    position: absolute;
+    top: 30%;
+    left: 2%;
+    font-size: 2.5rem;
+    color: var(--text-white);
+  }
+
+  .breakfast-title {
+    position: absolute;
+    top: 40%;
+    left: 2%;
+    font-size: 1.8rem;
+    color: var(--text-white);
+  }
+
+  .breakfast-banner img {
+    width: 100%;
+    border: var(--radius-xl) var(--radius-xl) 0 0;
+    object-fit: cover;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -55,6 +187,24 @@
     color: var(--text-white);
     padding: 60px 0 10px 40px;
     margin-bottom: 0;
+  }
+
+  .planned-meals-banner {
+    padding: 40px;
+  }
+
+  .meal-col {
+    width: 38%;
+    height: fit-content;
+  }
+
+  .dinner-card {
+    min-width: 400px;
+  }
+
+  .info-col {
+    min-width: 635px;
+    width: 60%;
   }
 }
 

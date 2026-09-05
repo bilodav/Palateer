@@ -9,6 +9,7 @@ import Button from "../ui/Button";
 import DayCard from "./DayCard";
 import styles from "./MealPlanner.module.css";
 import { useState, useMemo } from "react";
+import ShoppingList from "./ShoppingList";
 
 function MealPlanner() {
   const [weekStart, setWeekStart] = useState(startOfWeek(new Date()));
@@ -70,7 +71,14 @@ function MealPlanner() {
           );
         })}
       </div>
-      <DayCard date={selectedDate} />
+      <div className={styles["display-board"]}>
+        <div className={styles["col-1"]}>
+          <DayCard date={selectedDate} />
+        </div>
+        <div className={styles["col-2"]}>
+          <ShoppingList date={selectedDate} />
+        </div>
+      </div>
     </div>
   );
 }

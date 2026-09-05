@@ -15,7 +15,7 @@
 
   .meal-slot-card {
     height: 100%;
-    width: 90%;
+    width: 100%;
     border: 1px solid var(--border-dark);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
