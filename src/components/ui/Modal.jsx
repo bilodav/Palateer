@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import Button from "./Button";
 import styles from "./Modal.module.css";
@@ -44,5 +45,13 @@ function Modal({
     </dialog>
   );
 }
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  showCloseButton: PropTypes.bool,
+};
 
 export default Modal;

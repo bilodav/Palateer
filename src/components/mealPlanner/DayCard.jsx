@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useMealPlanner } from "../context/MealPlannerContext";
 import MealSlot from "./MealSlot";
 import styles from "./DayCard.module.css";
@@ -28,5 +29,9 @@ function DayCard({ date }) {
     </div>
   );
 }
+
+DayCard.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+};
 
 export default DayCard;

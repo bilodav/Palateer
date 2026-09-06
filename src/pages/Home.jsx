@@ -7,6 +7,7 @@ import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMealPlanner } from "../components/context/MealPlannerContext";
 import { dateFormat } from "../utils/helpers";
+import { useState } from "react";
 function Home() {
   const navigate = useNavigate();
   const { getMealForDate } = useMealPlanner();
@@ -17,19 +18,18 @@ function Home() {
     plannerEntry?.meal?.lunch ||
     plannerEntry?.meal?.dinner;
 
-  const randomTip = Math.floor(Math.random() * 34) + 1;
   const breakfastList = recipesData.filter(
     (entry) => entry.category === "breakfast",
   );
   const dinnerList = recipesData.filter((entry) => entry.category === "dinner");
 
-  const randomDinner =
-    dinnerList[Math.floor(Math.random() * dinnerList.length) + 1];
-
-  const randomBreakfast =
-    breakfastList[Math.floor(Math.random() * breakfastList.length) + 1];
-
-  console.log(randomDinner);
+  const [randomTip] = useState(() => Math.floor(Math.random() * 34) + 1);
+  const [randomDinner] = useState(
+    () => dinnerList[Math.floor(Math.random() * dinnerList.length)],
+  );
+  const [randomBreakfast] = useState(
+    () => breakfastList[Math.floor(Math.random() * breakfastList.length)],
+  );
 
   return (
     <section className={styles["home-page"]}>

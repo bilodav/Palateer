@@ -2,10 +2,10 @@
 @media (min-width: 176px) {
   /* body {background-color: green;} */
   .recipe-list {
-    padding: 15px;
+    padding: 20px 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 20px 40px;
     align-items: center;
     justify-content: flex-start;
   }
@@ -14,6 +14,9 @@
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   /* body {background-color: rgb(71, 17, 195);} */
+  .recipe-list {
+    padding: 20px 30px;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */

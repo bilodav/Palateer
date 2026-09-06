@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styles from "./Card.module.css";
 
 function Card({ image, title }) {
@@ -9,5 +9,10 @@ function Card({ image, title }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default Card;

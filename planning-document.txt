@@ -2,9 +2,7 @@ PLANNING DOCUMENT
 Palateer — Recipe Discovery & Meal Planning App
 
 STATUS AS OF THIS DOCUMENT
-No code has been written yet. Six UI mockups have been designed
-(Home/Recipe browsing, Recipe detail, Meal planner, Favorites,
-404 Not Found, Mobile view) to guide the build. This document
+No code has been written yet This document
 describes the intended component structure, data flow, and state
 strategy for implementation.
 
@@ -123,10 +121,4 @@ Card and Modal both accept a `children` prop for composition.
   filter/search state) to avoid unnecessary prop drilling.
 
 ------------------------------------------------------------
-6. OPEN QUESTIONS / NEXT STEPS
-- Confirm Vite vs Create React App for setup
-- Source or generate placeholder video/audio assets
-- Write sample recipesData.js covering all 5 required categories
-- Build components bottom-up: UI primitives first, then Recipe and
-  MealPlanner components, then pages, then routing
 

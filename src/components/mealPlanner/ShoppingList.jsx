@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./ShoppingList.module.css";
 import { useMealPlanner } from "../context/MealPlannerContext";
 import { dateFormat } from "../../utils/helpers";
@@ -19,7 +20,6 @@ function ShoppingList({ title = "Pantry List", date = new Date() }) {
     { slot: "lunch", recipe: findRecipeById(meal.lunch) },
     { slot: "dinner", recipe: findRecipeById(meal.dinner) },
   ].filter(({ recipe }) => recipe?.ingredients?.length); //filter out empty ingredients so that I do not render empty lists
-  console.log(recipeList);
 
   return (
     <div className={styles["shopping-list"]}>
@@ -39,5 +39,10 @@ function ShoppingList({ title = "Pantry List", date = new Date() }) {
     </div>
   );
 }
+
+ShoppingList.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.instanceOf(Date),
+};
 
 export default ShoppingList;

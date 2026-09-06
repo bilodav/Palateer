@@ -12,7 +12,7 @@
   .logo-container {
     height: 60px;
     width: 60px;
-    background-image: url("../../assets/images/logoSmall.png");
+    background-image: url("/assets/images/logoSmall.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@
   }
 
   .logo-container {
-    background-image: url("../../assets/images/logoLarge.png");
+    background-image: url("/assets/images/logoLarge.png");
     height: 150px;
     width: 75%;
     margin-top: -10px;
@@ -161,9 +161,9 @@
 
   .nav-filler {
     display: block;
-    height: 350px;
+    height: 340px;
     width: 160px;
-    background-image: url("../../assets/images/navMessage.png");
+    background-image: url("/assets/images/navMessage.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

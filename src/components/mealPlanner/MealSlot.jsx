@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { recipesData } from "../../data/recipesData";
 import styles from "./MealSlot.module.css";
@@ -77,5 +78,12 @@ function MealSlot({ label, recipeId, date, mealType }) {
     </div>
   );
 }
+
+MealSlot.propTypes = {
+  label: PropTypes.string.isRequired,
+  recipeId: PropTypes.number,
+  date: PropTypes.instanceOf(Date).isRequired,
+  mealType: PropTypes.oneOf(["breakfast", "lunch", "dinner"]).isRequired,
+};
 
 export default MealSlot;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import Favorite from "../ui/Favorite";
@@ -57,5 +58,17 @@ function RecipeCard({
     </div>
   );
 }
+
+RecipeCard.propTypes = {
+  image: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  title: PropTypes.string.isRequired,
+  cookingTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
+  difficulty: PropTypes.oneOf(["easy", "medium", "hard"]).isRequired,
+  onNavigate: PropTypes.func,
+  servings: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
+};
 
 export default RecipeCard;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./SearchBar.module.css";
 
 function SearchBar({
@@ -42,8 +43,14 @@ function SearchBar({
   );
 }
 
-export default SearchBar;
-// 065 625 2741
+SearchBar.propTypes = {
+  searchBy: PropTypes.string.isRequired,
+  onSearchBy: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  onSortChange: PropTypes.func.isRequired,
+  sortValue: PropTypes.string.isRequired,
+};
 
-// 1468 3313 86
-// 470010
+export default SearchBar;

@@ -1,0 +1,48 @@
+PLANNING AND ARCHITECTURE DOCUMENT  - Palateer Meal Tracker App
+- This is the as-built architecture, it is written post-development to accurately describe what I am shipping and it supercedes the original pre-development plan
+
+1. Component Hierarchy
+App
+└── FavoritesProvider (context)
+    └── MealPlannerProvider (context)
+        ├── Navbar
+        └── Routes
+            ├── Home → AudioPlayer, Card ×5, Button
+            ├── RecipesPage → SearchBar, FilterBar, RecipeList → RecipeCard ×n → Favorite
+            ├── RecipeDetailPage → RecipeDetail
+            │     → VideoPlayer → Modal → Loader
+            │     → TabList → List
+            │     → MealPicker, Favorite, Button
+            ├── MealPlannerPage → MealPlanner
+            │     → DayCard ×7 → MealSlot ×3 → Modal → MealPicker
+            │     → ShoppingList → List
+            ├── FavoritesPage → SearchBar, FilterBar, RecipeCard ×n
+            └── NotFound → Button
+
+Nesting reaches 5 Levels deep at points (App → MealPlannerPage → MealPlanner → DayCard → MealSlot → Modal → MealPicker ).
+Components reused across multiple locations: RecipeCard, Button, Modal, List, SearchBar, FilterBar, Favorite.
+
+2. Data Flow
+Two Context stores holds my shared state across multilple pages of my app. FavoritesContext holds a Set of favorite recipe IDs, plus toggleFavorite and isFavorite methods. MealPlannerContext holds an array of {date, meal:{breakfast, lunch, dinner}} entries plus updateMealSlot, removeMeal and getMealForDate methods. Both context providers persist to localStorage via useEffect. Any component reads/writes this directly using useFavorites() or useMealPlanner() which keeps RecipesPage, FavoritesPage, RecipeDetail and MealSlot in sync with eachother automatically, ehich demonstrates the sibling communication mechanism. Page-local state is useState inside the component that owns it and flows down to children as props, with callback props carrying events back up.
+
+3. Components
+- Navigation: Navbar
+- Recipe: RecipeCard, RecipeList, RecipeDetail
+- Meal Planner: MealPlanner, DayCard, MealSlot, MealPicker, ShoppingList
+- Media: VideoPlayer, AudioPlayer
+- UI: Button, Card, SearchBar, FilterBar, Modal, Loader, Favorite, List, TabList
+- Context: FavoritesProvider, MealPlannerProvider
+- Pages: Home, RecipesPage, RecipeDetailPage, MealPlannerPage, FavoritesPage, NotFound
+
+
+4. Props Flow (Key Examples)
+- RecipeList → RecipeCard: id, title, image, cookingTime, servings, difficulty, onNavigate (7 props)
+- MealSlot → Modal → MealPicker: date, mealType, onDone — composition via children
+- TabList: headers (string array) + content (array of JSX elements) — expressions passed as props
+- Modal: isOpen, onClose, children, showCloseButton — children/composition pattern, also used by VideoPlayer
+
+5. State Management Strategy
+- Global/Shared state → Context: favorites and themealplan since both are needed by multiple non-nested pages.
+- Page-local state → useState: search text, filters, sort order, active tab, modal visibility, checked item,
+- Derived data computed on render, not stored: filtered and sorted recipe lists as well as day meal lookups are produced by pure helper functions in utils/helpers.js each time a render occurs, rather than being duplicated into state.
+- Persistance: useEffect writes favoriteIds and mealPlan to localStorage whenever they change and both are then read back on load via a lazy useState initializer

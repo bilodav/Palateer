@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import Button from "../ui/Button";
 import styles from "./MealPicker.module.css";
@@ -78,5 +79,13 @@ function MealPicker({ recipeId, date, mealType, title, onDone }) {
     </form>
   );
 }
+
+MealPicker.propTypes = {
+  recipeId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  date: PropTypes.string,
+  mealType: PropTypes.oneOf(["breakfast", "lunch", "dinner"]),
+  title: PropTypes.string,
+  onDone: PropTypes.func,
+};
 
 export default MealPicker;

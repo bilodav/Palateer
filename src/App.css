@@ -559,7 +559,7 @@ a {
 /* Small devices (tiny screens and up, 176px and up) */
 @media (min-width: 176px) {
   .page-not-found {
-    background-image: url("./assets/images/bg404.png");
+    background-image: url("/assets/images/bg404.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;

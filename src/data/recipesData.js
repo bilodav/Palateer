@@ -889,7 +889,7 @@ export const recipesData = [
     difficulty: "medium",
     cookTime: 49,
     servings: 3,
-    image: "/assets/images/recipes/vegetableSamos.jpg",
+    image: "/assets/images/recipes/vegetableSamosas.jpg",
     videoUrl: "https://www.youtube.com/embed/XEg8-cUoNiE?si=6hKQewMIPA23dnNt",
     ingredients: [
       "2 cups vegetables",
@@ -1091,7 +1091,7 @@ export const recipesData = [
     difficulty: "hard",
     cookTime: 37,
     servings: 5,
-    image: "/assets/images/recipes/omlette.jpg",
+    image: "/assets/images/recipes/omelette.jpg",
     videoUrl: "https://www.youtube.com/embed/bF4bp-lRbDg?si=HMP0fSTJDKxRLjbp",
     ingredients: [
       "4 eggs",
@@ -2904,7 +2904,7 @@ export const recipesData = [
     difficulty: "easy",
     cookTime: 37,
     servings: 6,
-    image: "/assets/images/recipes/vegetableBiriyani.jpg",
+    image: "/assets/images/recipes/vegetableBiryani.jpg",
     videoUrl: "https://www.youtube.com/embed/Do7ZdUodDdw?si=J0cEiXsG54pqunXK",
     ingredients: [
       "2 cups mixed vegetables",

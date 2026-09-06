@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./Navbar.module.css";
 import { useFavorites } from "../context/FavoritesContext";
 

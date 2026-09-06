@@ -1,19 +1,22 @@
 .filter-bar {
+  box-sizing: border-box;
   width: 100%;
-  height: 50px;
+  height: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
-.filter-cats {
-  display: flex;
-  justify-content: space-around;
+.filter-bar select {
+  max-width: 20%;
+  height: 100%;
 }
 
-.filter {
-  background-color: aqua;
-  height: fit-content;
-  padding: 1px 5px;
-  border-radius: var(--radius-md);
-  font-size: 0.8rem;
+.filter-bar span {
+  max-width: 20%;
+  height: 100%;
+  vertical-align: top;
+  padding-left: 15px;
 }

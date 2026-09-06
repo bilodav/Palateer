@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import styles from "./TabList.module.css";
 import { capitalizeString } from "../../utils/helpers";
@@ -22,5 +23,10 @@ function TabList({ headers = [], content = [] }) {
     </div>
   );
 }
+
+TabList.propTypes = {
+  headers: PropTypes.arrayOf(PropTypes.string),
+  content: PropTypes.arrayOf(PropTypes.node),
+};
 
 export default TabList;

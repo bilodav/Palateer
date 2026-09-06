@@ -1,4 +1,5 @@
-import styles from "./Recipe.module.css";
+import PropTypes from "prop-types";
+import styles from "./RecipeDetail.module.css";
 import Favorite from "../ui/Favorite";
 import { useFavorites } from "../context/FavoritesContext";
 import { useNavigate } from "react-router-dom";
@@ -117,5 +118,23 @@ function RecipeDetail({
     </div>
   );
 }
+
+RecipeDetail.propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    title: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    cuisine: PropTypes.string.isRequired,
+    difficulty: PropTypes.oneOf(["easy", "medium", "hard"]).isRequired,
+    cookTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    servings: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    image: PropTypes.string.isRequired,
+    videoUrl: PropTypes.string.isRequired,
+    instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
 
 export default RecipeDetail;

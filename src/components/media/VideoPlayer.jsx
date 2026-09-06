@@ -1,10 +1,13 @@
-import { useEffect, useState, useRef } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal.jsx";
+import Loader from "../ui/Loader.jsx";
 import styles from "./Video.module.css";
-function VideoPlayer({ videoUrl, className }) {
+function VideoPlayer({ videoUrl, className = "" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // A regex to test if videoUrl is either a video that is online or via a  youTube source or vimeo
   const videoRegex =
@@ -17,6 +20,14 @@ function VideoPlayer({ videoUrl, className }) {
   };
   const closeModal = () => setIsOpen(false);
 
+  // Reset the loading and error state every time the modal is opened, so that re opening the same video will show the modal again.
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      setHasError(false);
+    }
+  }, [isOpen]);
+
   return (
     <div className={`${className} ${styles["video-player"]}`}>
       <Button
@@ -27,36 +38,61 @@ function VideoPlayer({ videoUrl, className }) {
       />
 
       <Modal isOpen={isOpen} onClose={closeModal}>
-        {/* Conditionally rendering the iframe if the path is a url and also so that it unmounts on dialog close and video stops */}
-        {isOpen && isURL && (
-          <iframe
-            className={styles["iframe"]}
-            src={videoUrl}
-            title="Recipe Video Player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
-        )}
-        {/* Conditionally rendering the video if the path is a local file and also so that it unmounts on dialog close and video stops */}
-        {isOpen && !isURL && !hasError && (
-          <video controls Autoplay onError={() => setHasError(true)}>
-            <source src={videoUrl} type="video/mp4" />
-            Your browser does not support the video tag
-          </video>
-        )}
-        {/* Error state shown when the local file path is broken/missing */}
-        {isOpen && !isURL && hasError && (
-          <div className={styles["video-error"]}>
-            <p style={{ height: "200px", marginTop: "150px", padding: "20px" }}>
-              ⚠️ This video could not be loaded.
-            </p>
-          </div>
-        )}
+        <div className={styles["video-display"]}>
+          {/* Display Loader while video loads and renders */}
+          {isOpen && isLoading && !hasError && (
+            <div className={styles["video-loader"]}>
+              <Loader />
+            </div>
+          )}
+          {/* Conditionally rendering the iframe if the path is a url and also so that it unmounts on dialog close and video stops */}
+          {isOpen && isURL && (
+            <iframe
+              className={styles["iframe"]}
+              src={videoUrl}
+              title="Recipe Video Player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              onLoad={() => {
+                setIsLoading(false);
+              }}
+            ></iframe>
+          )}
+          {/* Conditionally rendering the video if the path is a local file and also so that it unmounts on dialog close and video stops */}
+          {isOpen && !isURL && !hasError && (
+            <video
+              controls
+              onLoadedData={() => setIsLoading(false)}
+              onError={() => {
+                setHasError(true);
+                setIsLoading(false);
+              }}
+            >
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag
+            </video>
+          )}
+          {/* Error state shown when the local file path is broken/missing */}
+          {isOpen && !isURL && hasError && (
+            <div className={styles["video-error"]}>
+              <p
+                style={{ height: "200px", marginTop: "150px", padding: "20px" }}
+              >
+                ⚠️ This video could not be loaded.
+              </p>
+            </div>
+          )}
+        </div>
       </Modal>
     </div>
   );
 }
+
+VideoPlayer.propTypes = {
+  videoUrl: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
 
 export default VideoPlayer;

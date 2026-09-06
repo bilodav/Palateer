@@ -14,7 +14,7 @@ function Button({
   );
 }
 
-Button.PropTypes = {
+Button.propTypes = {
   title: PropTypes.string,
   className: PropTypes.string,
   text: PropTypes.string.isRequired,
