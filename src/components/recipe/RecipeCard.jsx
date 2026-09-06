@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import Favorite from "../ui/Favorite";
 import styles from "./RecipeCard.module.css";
+import { asset } from "../../utils/assetPath";
 
 function RecipeCard({
   image,
@@ -25,7 +26,9 @@ function RecipeCard({
     <div className={styles["recipe-card"]} id={id} onClick={onNavigate}>
       <div className={styles["card-image"]}>
         <img
-          src={hasError ? "/assets/images/placeholder.jpg" : image}
+          src={
+            hasError ? asset("/assets/images/placeholder.jpg") : asset(image)
+          }
           alt={title}
           onError={() => setHasError(true)}
         />

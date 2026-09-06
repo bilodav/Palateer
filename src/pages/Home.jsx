@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useMealPlanner } from "../components/context/MealPlannerContext";
 import { dateFormat } from "../utils/helpers";
 import { useState } from "react";
+import { asset } from "../utils/assetPath";
 function Home() {
   const navigate = useNavigate();
   const { getMealForDate } = useMealPlanner();
@@ -40,7 +41,7 @@ function Home() {
         <h2>Explore Cooking tips</h2>
         <AudioPlayer
           style={{ width: "300px", paddingLeft: "40px" }}
-          src={`./assets/audio/tip${randomTip}.mp3`}
+          src={asset(`./assets/audio/tip${randomTip}.mp3`)}
         />
       </div>
       <div className={styles["planned-meals-banner"]}>
@@ -48,7 +49,7 @@ function Home() {
           <h3>Wondering Whats for Dinner</h3>
           <p>We got you</p>
           <div className={styles["dinner-card"]}>
-            <img src={randomDinner.image} alt={randomDinner.title} />
+            <img src={asset(randomDinner.image)} alt={randomDinner.title} />
             <span>{randomDinner.title}</span>
             <Button
               className="btn-ghost"
@@ -77,19 +78,25 @@ function Home() {
       <div className={styles["cuisine-banner"]}>
         <h2>Traverse Tantalizing Cuisines</h2>
         <div className={styles["cuisine-list"]}>
-          <Card title={"Thai"} image={"./assets/images/thaiCuisine.jpg"} />
+          <Card
+            title={"Thai"}
+            image={asset("./assets/images/thaiCuisine.jpg")}
+          />
           <Card
             title={"Italian"}
-            image={"./assets/images/italianCuisine.jpg"}
+            image={asset("./assets/images/italianCuisine.jpg")}
           />
           <Card
             title={"Japanese"}
-            image={"./assets/images/japaneseCuisine.jpg"}
+            image={asset("./assets/images/japaneseCuisine.jpg")}
           />
-          <Card title={"French"} image={"./assets/images/frenchCuisine.jpg"} />
+          <Card
+            title={"French"}
+            image={asset("./assets/images/frenchCuisine.jpg")}
+          />
           <Card
             title={"Mexican"}
-            image={"./assets/images/mexicanCuisine.jpg"}
+            image={asset("./assets/images/mexicanCuisine.jpg")}
           />
         </div>
       </div>
@@ -104,7 +111,7 @@ function Home() {
         <span className={styles["breakfast-title"]}>
           {randomBreakfast.title}
         </span>
-        <img src={randomBreakfast.image} alt={randomBreakfast.image} />
+        <img src={asset(randomBreakfast.image)} alt={randomBreakfast.image} />
       </div>
     </section>
   );

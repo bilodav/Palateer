@@ -10,6 +10,7 @@ import List from "../ui/List";
 import TabList from "../ui/TabList";
 import { capitalizeString } from "../../utils/helpers";
 import MealPicker from "../mealPlanner/MealPicker";
+import { asset } from "../../utils/assetPath";
 function RecipeDetail({
   recipe: {
     id,
@@ -50,7 +51,9 @@ function RecipeDetail({
     <div className={styles["recipe-detail"]}>
       <div className={styles["recipe-detail-image"]}>
         <img
-          src={hasError ? "/assets/images/placeholder.jpg" : image}
+          src={
+            hasError ? asset("/assets/images/placeholder.jpg") : asset(image)
+          }
           alt={title}
           onError={() => setHasError(true)}
         />

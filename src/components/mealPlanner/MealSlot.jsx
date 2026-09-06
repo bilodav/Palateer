@@ -7,6 +7,7 @@ import Modal from "../ui/Modal";
 import MealPicker from "./MealPicker";
 import { useMealPlanner } from "../context/MealPlannerContext";
 import { dateFormat } from "../../utils/helpers";
+import { asset } from "../../utils/assetPath";
 
 function findRecipeById(id) {
   return recipesData.find((recipe) => recipe.id === id);
@@ -48,7 +49,11 @@ function MealSlot({ label, recipeId, date, mealType }) {
       <p className={styles["label"]}>{label}</p>
       <div className={styles["meal-slot-card"]}>
         <img
-          src={recipe ? recipe.image : "/assets/images/placeholder2.jpg"}
+          src={
+            recipe
+              ? asset(recipe.image)
+              : asset("/assets/images/placeholder2.jpg")
+          }
           alt={recipe ? recipe.title : ""}
           onClick={handleCardClick}
         />
