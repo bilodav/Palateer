@@ -6,13 +6,14 @@ import styles from "./FavoritesPage.module.css";
 import SearchBar from "../components/ui/SearchBar";
 import FilterBar from "../components/ui/FilterBar";
 import { useRecipeFilters } from "../hooks/useRecipeFilters";
+import Button from "../components/ui/Button";
 
 function FavoritesPage() {
   const { isFavorite, favoriteIds } = useFavorites();
   const navigate = useNavigate();
 
   const favoriteRecipes = recipesData.filter((recipe) => isFavorite(recipe.id));
-  const { results, isFiltering, searchBar, filterBar } =
+  const { results, isFiltering, searchBar, filterBar, resetFilters } =
     useRecipeFilters(favoriteRecipes);
   return (
     <section className={styles["fav-page"]}>
@@ -44,7 +45,15 @@ function FavoritesPage() {
         {results && (
           <>
             {isFiltering && results.length > 0 && (
-              <p>Found {results.length} Results</p>
+              <div className={styles["filter-results"]}>
+                <span>Found {results.length} Results</span>
+                <Button
+                  className="btn-coral"
+                  text="Clear Filters"
+                  title="Clear all filters"
+                  onClick={() => resetFilters()}
+                />
+              </div>
             )}
             <div className={styles["fav-list"]}>
               {results.map((recipe) => (

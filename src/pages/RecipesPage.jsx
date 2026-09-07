@@ -4,9 +4,10 @@ import SearchBar from "../components/ui/SearchBar";
 import RecipeList from "../components/recipe/RecipeList";
 import FilterBar from "../components/ui/FilterBar";
 import { useRecipeFilters } from "../hooks/useRecipeFilters";
+import Button from "../components/ui/Button";
 
 function RecipesPage() {
-  const { results, isFiltering, searchBar, filterBar } =
+  const { results, isFiltering, searchBar, filterBar, resetFilters } =
     useRecipeFilters(recipesData);
   return (
     <section className={styles["rec-page"]}>
@@ -18,7 +19,7 @@ function RecipesPage() {
         </p>
       </div>
       <div>
-        <div>
+        <div className={styles["rec-utility"]}>
           <SearchBar {...searchBar} />
           <FilterBar {...filterBar} />
         </div>
@@ -26,7 +27,15 @@ function RecipesPage() {
           {results && (
             <>
               {isFiltering && results.length > 0 && (
-                <p>Found {results.length} Results</p>
+                <div className={styles["filter-results"]}>
+                  <span>Found {results.length} Results</span>
+                  <Button
+                    className="btn-coral"
+                    text="Clear Filters"
+                    title="Clear all filters"
+                    onClick={() => resetFilters()}
+                  />
+                </div>
               )}
               <RecipeList list={results} />
             </>

@@ -63,11 +63,13 @@ function MealPicker({ recipeId, date, mealType, title, onDone }) {
           <option hidden disabled value="">
             Choose a Meal
           </option>
-          {recipesData.map((recipe) => (
-            <option key={recipe.id} value={recipe.id}>
-              {recipe.title}
-            </option>
-          ))}
+          {[...recipesData]
+            .sort((a, b) => a.title.localeCompare(b.title))
+            .map((recipe) => (
+              <option key={recipe.id} value={recipe.id}>
+                {recipe.title}
+              </option>
+            ))}
         </select>
       )}
 

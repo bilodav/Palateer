@@ -36,6 +36,16 @@
     margin-top: 20px;
   }
 
+  .filter-results {
+    padding-top: 10px;
+    padding-left: 5px;
+  }
+
+  .filter-results button {
+    padding: 3px 12px;
+    margin-left: 15px;
+  }
+
   .fav-list {
     display: flex;
     flex-wrap: wrap;
@@ -64,10 +74,8 @@
     flex: 1;
     margin-left: auto;
   }
+
+  .intro-group {
+    padding-right: 5%;
+  }
 }
-
-/* Large devices (desktops, 992px and up) */
-/* @media (min-width: 992px) { */
-/* body {background-color: rgb(242, 118, 192);} */
-
-/* } */

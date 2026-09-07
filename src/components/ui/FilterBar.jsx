@@ -48,6 +48,8 @@ function FilterBar({
         <option value="breakfast">Breakfast</option>
         <option value="lunch">Lunch</option>
         <option value="dinner">Dinner</option>
+        <option value="dessert">Dessert</option>
+        <option value="snack">Snacks</option>
       </select>
       <select
         onChange={(e) => onDifficultyChange(e.target.value)}

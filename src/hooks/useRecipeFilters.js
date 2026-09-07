@@ -38,10 +38,21 @@ export function useRecipeFilters(list) {
     difficultyValue ||
     cookTimeValue;
 
+  const resetFilters = () => {
+    setSearchValue("");
+    setSearchByValue("");
+    setSortBy("name-asc");
+    setCuisineValue("");
+    setCategoryValue("");
+    setDifficultyValue("");
+    setCookTimeValue("");
+  };
+
   // Grouping the values to match SearchBar and filterBars prop shapes so that I can just spread these onto the components when calling
   return {
     results,
     isFiltering,
+    resetFilters,
     searchBar: {
       searchBy: searchByValue,
       onSearchBy: setSearchByValue,

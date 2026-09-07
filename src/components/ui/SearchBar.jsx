@@ -28,6 +28,7 @@ function SearchBar({
         />
       </div>
 
+      <label htmlFor="sort-select">Sort By:</label>
       <select onChange={(e) => onSortChange(e.target.value)} value={sortValue}>
         <option value="" hidden>
           Sort By:
